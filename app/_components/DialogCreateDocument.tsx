@@ -1,0 +1,114 @@
+"use client";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { PlusIcon } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { useForm } from "react-hook-form";
+import { Input } from "@/components/ui/input";
+import z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  FormControl,
+  FormField,
+  FormLabel,
+  FormItem,
+  FormMessage,
+  Form,
+} from "@/components/ui/form";
+
+const FormSchema = z.object({
+  title: z.string().trim().min(1, { message: "O título é obrigatório" }),
+  description: z
+    .string()
+    .trim()
+    .min(1, { message: "A descrição é obrigatória" }),
+});
+
+const DialogCreateDocument = () => {
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      title: "",
+      description: "",
+    },
+  });
+
+  const onSubmit = (data: z.infer<typeof FormSchema>) => {
+    console.log(data);
+  };
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button className="cursor-pointer">
+          <PlusIcon className="w-4 h-4 mr-1" />
+          Novo Documento
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Novo documento</DialogTitle>
+          <DialogDescription>
+            Preencha os campos para criar um novo documento.
+          </DialogDescription>
+        </DialogHeader>
+
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="space-y-5">
+              <FormField
+                control={form.control}
+                name="title"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Titulo</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Digite o titulo da transação"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Descrição</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        className="max-w-full"
+                        placeholder="Digite a descrição da transação"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <DialogFooter className="mt-5">
+              <Button type="submit" className="w-50 cursor-pointer">
+                Criar documento
+              </Button>
+            </DialogFooter>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+export default DialogCreateDocument;
