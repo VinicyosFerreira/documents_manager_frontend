@@ -36,8 +36,7 @@ const DialogCreateDocument = () => {
   });
 
   const onSubmit = async (data: z.infer<typeof CreateDocumentSchema>) => {
-    const response = await createDocumentAction(data);
-    console.log(response);
+    await createDocumentAction(data);
   };
 
   return (

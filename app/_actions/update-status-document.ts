@@ -24,7 +24,6 @@ export const updateStatusDocumentAction = async (
 
   try {
     const url = `${apiUrl}/${id.id}`;
-    console.log(url);
     const response = await fetch(url, {
       method: "PATCH",
     });
@@ -40,7 +39,7 @@ export const updateStatusDocumentAction = async (
       data: await response.json(),
     };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return {
       success: false,
       message: "Erro ao atualizar status do documento",

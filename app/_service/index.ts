@@ -7,8 +7,7 @@ export type DocumentInput = z.infer<typeof DocumentSchema>;
 export const DocumentService = {
   getDocuments: async (): Promise<DocumentInput[]> => {
     const response = await fetch(apiUrl);
-    console.log(response);
-
+  
     if (!response.ok) {
       throw new Error("Erro ao buscar documentos");
     }

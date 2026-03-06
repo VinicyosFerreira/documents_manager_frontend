@@ -34,7 +34,7 @@ export const createDocumentAction = async (
       data: await response.json(),
     };
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return {
       success: false,
       message: "Erro ao criar documento",
