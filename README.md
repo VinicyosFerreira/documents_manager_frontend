@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 💻 Gerenciador de Documentos (Front-end)
 
-## Getting Started
+#### Interface moderna e responsiva estruturada com Next.js e TypeScript, focada na gestão de documentos e consumo inteligente da API.
 
-First, run the development server:
+## 🚀 Tecnologias
+**Next.js (App Router)**: Framework React para viabilizar uma navegação rápida e otimizada.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+**TypeScript**: Garantia de tipagem ponta a ponta, evitando erros em tempo de execução.
+
+**Tailwind CSS e Shadcn**: Utilizado para estilização da UI em conjunto com componentes de alta qualidade do Shadcn. 
+
+**Lucide React**: Biblioteca de ícones para colaborar com uma interface intuitiva e limpa.
+
+**Zod e RHF**: Utilizado para validar formulários e dados da aplicação
+
+## 📁 Estrutura do Projeto
+```
+app/
+├── _components/   # Componentes da aplicação
+├── _services/     # Centralização dos fetch de dados
+├── _actions/      # Utilização de server actions para POST/PATCH
+componentes/        # Componentes do Shadcn
+lib/               # Configurações globais de libs        
+schemas/           # Schemas do zod para validação de dados
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🗺️ Explorando o código
+**Componentização Escalável**: Interface dividida em componentes, facilitando a manutenção e o reuso de código.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Consumo de API Assíncrono** : Implementação de serviços desacoplados que viabilizam a comunicação com o Back-end de forma organizada.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**UI minimalista e suave**: Uso de modais, toast, badges e componentes do ShadcnUI proporcionando interface fluída e suave.
 
-## Learn More
+**Validação de Formulários**: Uso de estados uncontrolled com RHF em conjunto com Zod permitindo validações de forma integrada com componentes de formulários do ShadcnUI
 
-To learn more about Next.js, take a look at the following resources:
+## 📦 Como rodar localmente
+**1.Clonar o projeto** 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+``git clone https://github.com/VinicyosFerreira/documents_manager_frontend ``
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+``cd documents_manager_frontend``
 
-## Deploy on Vercel
+**2.Configurar o env**: Crie um arquivo `.env` e aponte a URL da API (ex:API_URL=http://localhost:3333)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**3. Instalar dependências**: 
+``npm install``
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**4. Rodar o projeto**:
+``npm run dev``
+
+## 🔗 Links
+
+**OBS: Projeto estruturado em Multirepo visando a separação clara de stacks. Essa abordagem permite a escalibilidade isolada de cada camada**
+
+**Código Fonte**: [https://github.com/VinicyosFerreira/documents_manager_frontend]
+
+**Codigo Fonte Backend**: [https://github.com/VinicyosFerreira/documents_manager_api]
