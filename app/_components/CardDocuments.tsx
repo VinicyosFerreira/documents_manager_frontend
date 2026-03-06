@@ -1,45 +1,52 @@
 import CardItemDocument from "./CardItemDocument";
+import { DocumentService } from "../_service";
 
 const data = [
   {
-    title: "a",
-    description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+    id: 1,
+    titulo: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    descricao: `Lorem ipsum dolor sit amet consectetur adipisicing elit. 
     Quam aliquid corrupti dolorem fugit inventore ullam voluptas saepe odit rem dignissimos repellat 
     repellendus deserunt, in sunt at sequi cupiditate maiores vero!`,
     status: "PENDENTE",
   },
   {
-    title: "b",
-    description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+    id: 2,
+    titulo: "b",
+    descricao: `Lorem ipsum dolor sit amet consectetur adipisicing elit. 
     Quam aliquid corrupti dolorem fugit inventore ullam voluptas saepe odit rem dignissimos repellat 
     repellendus deserunt, in sunt at sequi cupiditate maiores vero!`,
     status: "ASSINADO",
   },
   {
-    title: "c",
-    description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+    id: 3,
+    titulo: "c",
+    descricao: `Lorem ipsum dolor sit amet consectetur adipisicing elit. 
     Quam aliquid corrupti dolorem fugit inventore ullam voluptas saepe odit rem dignissimos repellat 
     repellendus deserunt, in sunt at sequi cupiditate maiores vero!`,
     status: "PENDENTE",
   },
   {
-    title: "d",
-    description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+    id: 4,
+    titulo: "d",
+    descricao: `Lorem ipsum dolor sit amet consectetur adipisicing elit. 
     Quam aliquid corrupti dolorem fugit inventore ullam voluptas saepe odit rem dignissimos repellat 
     repellendus deserunt, in sunt at sequi cupiditate maiores vero!`,
     status: "ASSINADO",
   },
 ];
 
-const CardDocuments = () => {
+const CardDocuments = async () => {
+  //  const documents = await DocumentService.getDocuments();
+
   return (
-    <div className="grid grid-cols-4  gap-5 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      {data.map((item, i) => (
+    <div className="grid grid-cols-4 gap-5 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {data.map((item) => (
         <CardItemDocument
-          key={i}
-          title={item.title}
+          key={item.id}
+          titulo={item.titulo}
           status={item.status}
-          description={item.description}
+          description={item.descricao}
         />
       ))}
     </div>
