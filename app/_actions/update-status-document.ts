@@ -23,10 +23,16 @@ export const updateStatusDocumentAction = async (
   }
 
   try {
-    const response = await fetch(`${apiUrl}/${id.id}`, {
-      headers: { "Content-Type": "application/json" },
+    const url = `${apiUrl}/${id.id}`;
+    console.log(url);
+    const response = await fetch(url, {
       method: "PATCH",
     });
+
+    if(!response.ok) {
+       throw new Error("Erro ao atualizar status do documento"); 
+    }
+
     revalidatePath("/");
     return {
       success: true,
