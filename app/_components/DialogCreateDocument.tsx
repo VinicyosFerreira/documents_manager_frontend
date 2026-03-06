@@ -23,26 +23,21 @@ import {
   FormMessage,
   Form,
 } from "@/components/ui/form";
-
-const FormSchema = z.object({
-  title: z.string().trim().min(1, { message: "O título é obrigatório" }),
-  description: z
-    .string()
-    .trim()
-    .min(1, { message: "A descrição é obrigatória" }),
-});
+import { createDocumentAction } from "../_actions/create-document";
+import { CreateDocumentSchema } from "@/schemas";
 
 const DialogCreateDocument = () => {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<z.infer<typeof CreateDocumentSchema>>({
+    resolver: zodResolver(CreateDocumentSchema),
     defaultValues: {
-      title: "",
-      description: "",
+      titulo: "",
+      descricao: "",
     },
   });
 
-  const onSubmit = (data: z.infer<typeof FormSchema>) => {
-    console.log(data);
+  const onSubmit = async (data: z.infer<typeof CreateDocumentSchema>) => {
+    const response = await createDocumentAction(data);
+    console.log(response);
   };
 
   return (
@@ -66,7 +61,7 @@ const DialogCreateDocument = () => {
             <div className="space-y-5">
               <FormField
                 control={form.control}
-                name="title"
+                name="titulo"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Titulo</FormLabel>
@@ -83,7 +78,7 @@ const DialogCreateDocument = () => {
 
               <FormField
                 control={form.control}
-                name="description"
+                name="descricao"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Descrição</FormLabel>
