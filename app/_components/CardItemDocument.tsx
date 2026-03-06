@@ -5,6 +5,7 @@ import { Lock, Clock } from "lucide-react";
 import DialogViewDocument from "./DialogViewDocument";
 import { Button } from "@/components/ui/button";
 import { updateStatusDocumentAction } from "../_actions/update-status-document";
+import { toast } from "sonner";
 
 const CardItemDocument = ({
   title,
@@ -18,7 +19,8 @@ const CardItemDocument = ({
   id: string;
 }) => {
   const handleUpdateStatusDocument = async () => {
-    await updateStatusDocumentAction({id});
+    const result = await updateStatusDocumentAction({ id });
+    toast.success(result.message);
   };
   return (
     <Card>

@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -25,8 +26,10 @@ import {
 } from "@/components/ui/form";
 import { createDocumentAction } from "../_actions/create-document";
 import { CreateDocumentSchema } from "@/schemas";
+import {toast} from "sonner";
 
 const DialogCreateDocument = () => {
+  const [openDialog, setOpenDialog] = useState(false);
   const form = useForm<z.infer<typeof CreateDocumentSchema>>({
     resolver: zodResolver(CreateDocumentSchema),
     defaultValues: {
@@ -36,11 +39,14 @@ const DialogCreateDocument = () => {
   });
 
   const onSubmit = async (data: z.infer<typeof CreateDocumentSchema>) => {
-    await createDocumentAction(data);
+    const result = await createDocumentAction(data);
+    form.reset();
+    setOpenDialog(false);
+    toast.success(result.message);
   };
 
   return (
-    <Dialog>
+    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger asChild>
         <Button className="cursor-pointer">
           <PlusIcon className="w-4 h-4 mr-1" />
