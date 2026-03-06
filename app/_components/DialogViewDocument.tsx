@@ -8,20 +8,27 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
-const DialogViewDocument = ({title, description}: {title: string; description: string}) => {
+const DialogViewDocument = ({
+  title,
+  description,
+}: {
+  title: string;
+  description: string;
+}) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline" size="sm" className="cursor-pointer">
-          Ver descrição completa 
+          Ver descrição completa
         </Button>
       </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
+      <DialogContent className="break-all">
+        <DialogHeader className="mt-3">
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
       </DialogContent>
+  
     </Dialog>
   );
 };
