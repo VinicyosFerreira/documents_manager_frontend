@@ -4,22 +4,32 @@ import { Badge } from "@/components/ui/badge";
 import { Lock, Clock } from "lucide-react";
 import DialogViewDocument from "./DialogViewDocument";
 import { Button } from "@/components/ui/button";
+import { updateStatusDocumentAction } from "../_actions/update-status-document";
 
 const CardItemDocument = ({
   title,
   description,
   status,
+  id,
 }: {
   title: string;
   description: string;
   status: string;
+  id: string;
 }) => {
+  const handleUpdateStatusDocument = async () => {
+    await updateStatusDocumentAction({id});
+  };
   return (
     <Card>
       <CardHeader className="flex items-center justify-between">
         <CardTitle className="truncate">{title}</CardTitle>
         {status === "PENDENTE" && (
-          <Button variant="outline" size="sm">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleUpdateStatusDocument}
+          >
             <Lock className="w-4 h-4 mr-2" />
             Assinar
           </Button>
