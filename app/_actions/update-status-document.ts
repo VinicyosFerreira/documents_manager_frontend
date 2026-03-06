@@ -2,7 +2,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { UpdateStatusDocumentSchema, DocumentSchema } from "@/schemas";
-import { apiUrl } from "@/lib/env";
+import { DocumentService } from "../_services";
 
 export interface ActionResponse {
   success: boolean;
@@ -11,9 +11,9 @@ export interface ActionResponse {
 }
 
 export const updateStatusDocumentAction = async (
-  id: z.infer<typeof UpdateStatusDocumentSchema>,
+  documentId: z.infer<typeof UpdateStatusDocumentSchema>,
 ): Promise<ActionResponse> => {
-  const validated = UpdateStatusDocumentSchema.safeParse(id);
+  const validated = UpdateStatusDocumentSchema.safeParse(documentId);
 
   if (!validated.success) {
     return {
@@ -23,20 +23,13 @@ export const updateStatusDocumentAction = async (
   }
 
   try {
-    const url = `${apiUrl}/${id.id}`;
-    const response = await fetch(url, {
-      method: "PATCH",
-    });
-
-    if(!response.ok) {
-       throw new Error("Erro ao atualizar status do documento"); 
-    }
+    const response = await DocumentService.updateDocument(documentId.id);
 
     revalidatePath("/");
     return {
       success: true,
       message: "Status do documento atualizado com sucesso",
-      data: await response.json(),
+      data: response,
     };
   } catch (error) {
     console.error(error);

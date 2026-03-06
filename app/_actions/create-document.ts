@@ -2,7 +2,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { CreateDocumentSchema, DocumentSchema } from "@/schemas";
-import { apiUrl } from "@/lib/env";
+import { DocumentService } from "../_services";
 
 export interface ActionResponse {
   success: boolean;
@@ -22,16 +22,12 @@ export const createDocumentAction = async (
     };
   }
   try {
-    const response = await fetch(apiUrl, {
-      headers: { "Content-Type": "application/json" },
-      method: "POST",
-      body: JSON.stringify(data),
-    });
+    const result = await DocumentService.createDocument(data);
     revalidatePath("/");
     return {
       success: true,
       message: "Documento criado com sucesso",
-      data: await response.json(),
+      data: result,
     };
   } catch (err) {
     console.error(err);
