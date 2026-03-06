@@ -1,11 +1,12 @@
 import CardItemDocument from "./CardItemDocument";
-import { DocumentService } from "../_service"
+import { DocumentService } from "../_services"
 
 const CardDocuments = async () => {
   const documents = await DocumentService.getDocuments();
 
   return (
     <div className="grid grid-cols-4 gap-5 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {documents.length === 0 && <p className="font-semibold">Não há documentos cadastrados</p>}
       {documents.map((item) => (
         <CardItemDocument
           key={item.id}
